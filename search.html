@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pencarian & Filter Materi — RAY LEARN SMK</title>
+  <meta name="description" content="Cari materi pembelajaran SMK kelas 10, 11, dan 12 berdasarkan kata kunci, mata pelajaran, tag, dan jenjang kelas secara realtime.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/raylearn-logo.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              darkGreen: '#304D36',
+              deepGreen: '#243C2B',
+              cream: '#F4EBDD',
+              warmCream: '#EFE2CF',
+              orange: '#C86E39',
+              brightOrange: '#FFB51B',
+              yellow: '#F6B51B',
+              black: '#080808',
+              white: '#FFFDF8',
+              darkText: '#161616'
+            }
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', '"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F4EBDD] text-[#161616] antialiased selection:bg-[#FFB51B] selection:text-[#080808]">
+
+  <!-- Floating Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-10 transition-all duration-300">
+    <div id="main-navbar" class="max-w-7xl mx-auto my-3 px-5 py-4 bg-[#F4EBDD]/95 backdrop-blur-md border-2 border-[#161616] rounded-2xl flex items-center justify-between shadow-[4px_4px_0px_#161616] nav-floating">
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <span class="star-icon text-[#C86E39] group-hover:rotate-45 transition-transform duration-300"></span>
+        <div class="flex flex-col">
+          <span class="font-serif-title text-xl sm:text-2xl font-bold tracking-tight text-[#161616] leading-none">RAY LEARN</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-[#304D36]">Materi Pembelajaran SMK</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-[#161616]">
+        <a href="index.html" class="hover:text-[#C86E39] transition-colors">Beranda</a>
+        <a href="kelas-10.html" class="hover:text-[#C86E39] transition-colors">Kelas 10</a>
+        <a href="kelas-11.html" class="hover:text-[#C86E39] transition-colors">Kelas 11</a>
+        <a href="kelas-12.html" class="hover:text-[#C86E39] transition-colors">Kelas 12</a>
+        <a href="index.html#tentang" class="hover:text-[#C86E39] transition-colors">Tentang</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="search.html" class="p-2 sm:px-3 sm:py-2 rounded-full border border-[#161616] bg-[#FFB51B] text-[#080808] flex items-center gap-2 text-xs font-bold">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Pencarian</span>
+        </a>
+        <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg border border-[#161616] bg-[#FFFDF8] text-[#161616]">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto mt-2 p-5 bg-[#FFFDF8] border-2 border-[#161616] rounded-2xl shadow-[6px_6px_0px_#161616] flex flex-col gap-4 text-base font-bold">
+      <a href="index.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Beranda</a>
+      <a href="kelas-10.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 10</a>
+      <a href="kelas-11.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 11</a>
+      <a href="kelas-12.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 12</a>
+      <a href="search.html" class="text-[#C86E39] py-1">Pencarian</a>
+    </div>
+  </header>
+
+  <!-- Search Header Hero -->
+  <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-12 bg-[#304D36] text-[#FFFDF8] border-b-2 border-[#161616]">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="pill-badge bg-[#FFB51B] text-[#080808] mb-4">
+        <span class="star-icon"></span>
+        SISTEM TEMU KEMBALI INFORMASI
+      </span>
+      <h1 class="font-serif-title text-4xl sm:text-5xl md:text-6xl text-[#FFFDF8] mb-4">
+        Cari & Temukan Materi
+      </h1>
+      <p class="text-base sm:text-lg text-[#d3e2d6] mb-8 max-w-2xl mx-auto">
+        Ketik kata kunci judul, topik pemrograman, bahasa, atau tag kejuruan untuk menyaring arsip secara langsung.
+      </p>
+
+      <!-- Realtime Input Field -->
+      <div class="relative max-w-2xl mx-auto">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Contoh: laravel, html, esp32, flutter, matriks..."
+          class="w-full px-6 py-4.5 pl-14 pr-12 text-[#161616] placeholder-[#777] bg-[#FFFDF8] border-2 border-[#161616] rounded-2xl shadow-[6px_6px_0px_#080808] focus:outline-none focus:ring-2 focus:ring-[#FFB51B] text-base md:text-lg font-medium"
+          autocomplete="off"
+        >
+        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-[#161616] pointer-events-none">
+          <i data-lucide="search" class="w-6 h-6"></i>
+        </div>
+        <button id="clear-search-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#888] hover:text-[#161616] hidden p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Controls Section -->
+  <section class="py-10 px-4 sm:px-6 lg:px-12 bg-[#EFE2CF] border-b-2 border-[#161616]">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        
+        <!-- Class Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-black uppercase tracking-wider text-[#304D36] mr-2">Kelas:</span>
+          <button data-filter-class="all" class="filter-class-btn px-4 py-2 rounded-full border-2 border-[#161616] bg-[#304D36] text-[#FFFDF8] font-bold text-xs tracking-wide shadow-[2px_2px_0px_#161616]">
+            Semua
+          </button>
+          <button data-filter-class="10" class="filter-class-btn px-4 py-2 rounded-full border-2 border-[#161616] bg-[#FFFDF8] text-[#161616] font-bold text-xs tracking-wide hover:bg-[#F4EBDD]">
+            Kelas 10
+          </button>
+          <button data-filter-class="11" class="filter-class-btn px-4 py-2 rounded-full border-2 border-[#161616] bg-[#FFFDF8] text-[#161616] font-bold text-xs tracking-wide hover:bg-[#F4EBDD]">
+            Kelas 11
+          </button>
+          <button data-filter-class="12" class="filter-class-btn px-4 py-2 rounded-full border-2 border-[#161616] bg-[#FFFDF8] text-[#161616] font-bold text-xs tracking-wide hover:bg-[#F4EBDD]">
+            Kelas 12
+          </button>
+        </div>
+
+        <!-- Subject Filter Dropdown -->
+        <div class="flex items-center gap-3">
+          <label for="filter-subject-select" class="text-xs font-black uppercase tracking-wider text-[#304D36] whitespace-nowrap">Mapel:</label>
+          <select id="filter-subject-select" class="px-4 py-2 bg-[#FFFDF8] border-2 border-[#161616] rounded-xl text-xs font-bold text-[#161616] focus:outline-none focus:ring-1 focus:ring-[#304D36] shadow-[2px_2px_0px_#161616]">
+            <option value="all">Semua Mata Pelajaran</option>
+            <option value="PPLG">PPLG</option>
+            <option value="Pemrograman Mobile">Pemrograman Mobile</option>
+            <option value="Matematika">Matematika</option>
+            <option value="Bahasa Inggris">Bahasa Inggris</option>
+            <option value="PIPAS">PIPAS</option>
+            <option value="PKKWU">PKKWU</option>
+            <option value="Informatika">Informatika</option>
+            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+            <option value="PPKn">PPKn</option>
+            <option value="Sejarah">Sejarah</option>
+            <option value="Seni Budaya">Seni Budaya</option>
+            <option value="PJOK">PJOK</option>
+            <option value="PAI">PAI</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Quick Tag Chips -->
+      <div class="mt-6 pt-4 border-t border-[#161616]/15 flex flex-wrap items-center gap-2">
+        <span class="text-xs font-semibold text-[#555] mr-1">Tag Populer:</span>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="HTML">#HTML</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="CSS">#CSS</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="Laravel">#Laravel</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="Flutter">#Flutter</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="IoT">#IoT</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="Python">#Python</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="Database">#Database</button>
+        <button class="tag-chip px-3 py-1 bg-[#FFFDF8] border border-[#161616] rounded-full text-xs font-bold hover:bg-[#FFB51B] transition-colors" data-tag="KTI">#KTI</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Results Area -->
+  <main class="py-16 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto min-h-[500px]">
+    
+    <!-- Result Header / Counter -->
+    <div class="flex items-center justify-between pb-4 mb-8 border-b-2 border-[#161616]/15">
+      <div id="results-count" class="text-sm font-extrabold uppercase tracking-widest text-[#304D36]">
+        Menampilkan semua materi
+      </div>
+      <button id="reset-filters-btn" class="text-xs font-bold text-[#C86E39] hover:underline hidden">
+        Reset Semua Filter
+      </button>
+    </div>
+
+    <!-- Results Grid -->
+    <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#243C2B] text-[#FFFDF8] border-t-2 border-[#161616] pt-16 pb-12 px-4 sm:px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/15">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="star-icon text-[#FFB51B]"></span>
+            <span class="font-serif-title text-2xl font-bold text-[#FFFDF8]">RAY LEARN</span>
+          </div>
+          <p class="text-sm text-[#cbdad0] leading-relaxed mb-6 max-w-sm">
+            Materi pembelajaran SMK untuk belajar, memahami, dan berkembang. Dirancang dengan gaya visual majalah editorial modern.
+          </p>
+        </div>
+        <div class="md:col-span-4">
+          <h4 class="font-serif-title text-lg text-[#FFB51B] mb-4">Pilih Jenjang</h4>
+          <ul class="space-y-2 text-sm text-[#d0ded5]">
+            <li><a href="kelas-10.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 10 (Dasar Kejuruan)</a></li>
+            <li><a href="kelas-11.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 11 (Framework & Mobile)</a></li>
+            <li><a href="kelas-12.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 12 (IoT & Sistem Informasi)</a></li>
+            <li><a href="search.html" class="text-[#FFB51B] font-bold">&rarr; Cari Materi (Aktif)</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-3">
+          <h4 class="font-serif-title text-lg text-[#FFB51B] mb-4">Navigasi Cepat</h4>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="index.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Beranda</a>
+            <a href="kelas-10.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 10</a>
+            <a href="kelas-11.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 11</a>
+            <a href="kelas-12.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 12</a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9bb09f]">
+        <div>&copy; 2026 <strong>Ray Learn</strong>. Hak cipta dilindungi undang-undang.</div>
+        <a href="index.html" class="hover:text-[#FFFDF8]">Kembali ke Beranda &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      const searchInput = document.getElementById('search-input');
+      const clearBtn = document.getElementById('clear-search-btn');
+      const resultsGrid = document.getElementById('search-results-grid');
+      const resultsCount = document.getElementById('results-count');
+      const classButtons = document.querySelectorAll('.filter-class-btn');
+      const subjectSelect = document.getElementById('filter-subject-select');
+      const tagChips = document.querySelectorAll('[data-tag]');
+      const resetBtn = document.getElementById('reset-filters-btn');
+
+      let currentClassFilter = 'all';
+      let currentSubjectFilter = 'all';
+      let currentKeyword = '';
+
+      // Check query parameter on load
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryParam = urlParams.get('q');
+      if (queryParam) {
+        searchInput.value = queryParam;
+        currentKeyword = queryParam.trim();
+        clearBtn.classList.remove('hidden');
+      }
+
+      function filterAndRender() {
+        if (typeof materials === 'undefined') return;
+
+        const kw = currentKeyword.toLowerCase();
+        const filtered = materials.filter(item => {
+          // Class match
+          if (currentClassFilter !== 'all' && item.classLevel !== parseInt(currentClassFilter, 10)) {
+            return false;
+          }
+          // Subject match
+          if (currentSubjectFilter !== 'all' && item.subject.toLowerCase() !== currentSubjectFilter.toLowerCase()) {
+            return false;
+          }
+          // Keyword match (title, subject, category, tags, description)
+          if (kw) {
+            const matchTitle = item.title.toLowerCase().includes(kw);
+            const matchSubject = item.subject.toLowerCase().includes(kw);
+            const matchCat = item.category.toLowerCase().includes(kw);
+            const matchDesc = item.description.toLowerCase().includes(kw);
+            const matchTag = item.tags.some(t => t.toLowerCase().includes(kw));
+            if (!matchTitle && !matchSubject && !matchCat && !matchDesc && !matchTag) {
+              return false;
+            }
+          }
+          return true;
+        });
+
+        // Update Counter
+        const total = filtered.length;
+        if (kw || currentClassFilter !== 'all' || currentSubjectFilter !== 'all') {
+          resultsCount.innerHTML = `Ditemukan <strong>${total}</strong> materi yang cocok`;
+          resetBtn.classList.remove('hidden');
+        } else {
+          resultsCount.textContent = `Menampilkan semua ${total} materi`;
+          resetBtn.classList.add('hidden');
+        }
+
+        // Render Empty State
+        if (total === 0) {
+          resultsGrid.innerHTML = `
+            <div class="col-span-full py-20 text-center">
+              <span class="star-icon star-icon-lg text-[#C86E39] mb-4"></span>
+              <h3 class="font-serif-title text-3xl text-[#161616] mb-3">Tidak Ada Materi yang Cocok</h3>
+              <p class="text-sm text-[#555] max-w-md mx-auto mb-6">
+                Coba gunakan kata kunci lain seperti "HTML", "Laravel", "IoT", atau hapus filter yang aktif.
+              </p>
+              <button id="btn-reset-empty" class="px-6 py-2.5 bg-[#304D36] text-[#FFFDF8] rounded-full font-bold text-xs">
+                Tampilkan Semua Materi
+              </button>
+            </div>
+          `;
+          const btnResetEmpty = document.getElementById('btn-reset-empty');
+          if (btnResetEmpty) {
+            btnResetEmpty.addEventListener('click', resetAll);
+          }
+          return;
+        }
+
+        // Render Cards
+        let html = '';
+        filtered.forEach(item => {
+          html += `
+            <article class="bg-[#FFFDF8] border-2 border-[#161616] rounded-xl p-6 flex flex-col justify-between editorial-card shadow-[4px_4px_0px_#161616]">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="pill-badge bg-[#304D36] text-[#FFFDF8] text-[10px]">
+                    KELAS ${item.classLevel}
+                  </span>
+                  <span class="text-xs text-[#666] font-medium bg-[#EFE2CF] px-2 py-0.5 rounded">
+                    ${item.readTime}
+                  </span>
+                </div>
+
+                <div class="text-[11px] font-bold uppercase tracking-wider text-[#C86E39] mb-1">
+                  ${item.subject} &bull; ${item.category}
+                </div>
+
+                <h3 class="font-serif-title text-xl md:text-2xl text-[#161616] mb-3 leading-snug">
+                  <a href="materi.html?id=${item.id}" class="hover:text-[#C86E39] transition-colors">
+                    ${item.title}
+                  </a>
+                </h3>
+
+                <p class="text-[#3c443e] text-sm leading-relaxed mb-4 line-clamp-3">
+                  ${item.description}
+                </p>
+
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  ${item.tags.map(t => `<span class="text-[10px] bg-[#F4EBDD] border border-[#161616]/30 px-2 py-0.5 rounded font-semibold text-[#333]">#${t}</span>`).join('')}
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-[#EFE2CF] flex items-center justify-between text-xs">
+                <span class="text-[#888]">${item.date}</span>
+                <a href="materi.html?id=${item.id}" class="inline-flex items-center gap-1 font-bold text-sm text-[#304D36] hover:text-[#C86E39] group">
+                  <span>Buka Materi</span>
+                  <span class="card-arrow">&rarr;</span>
+                </a>
+              </div>
+            </article>
+          `;
+        });
+        resultsGrid.innerHTML = html;
+      }
+
+      // Input Event
+      searchInput.addEventListener('input', (e) => {
+        currentKeyword = e.target.value.trim();
+        if (currentKeyword.length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+        filterAndRender();
+      });
+
+      // Clear Button
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentKeyword = '';
+        clearBtn.classList.add('hidden');
+        filterAndRender();
+        searchInput.focus();
+      });
+
+      // Class Buttons Event
+      classButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentClassFilter = btn.dataset.filterClass;
+          classButtons.forEach(b => {
+            b.classList.remove('bg-[#304D36]', 'text-[#FFFDF8]', 'shadow-[2px_2px_0px_#161616]');
+            b.classList.add('bg-[#FFFDF8]', 'text-[#161616]');
+          });
+          btn.classList.add('bg-[#304D36]', 'text-[#FFFDF8]', 'shadow-[2px_2px_0px_#161616]');
+          btn.classList.remove('bg-[#FFFDF8]', 'text-[#161616]');
+          filterAndRender();
+        });
+      });
+
+      // Subject Dropdown
+      subjectSelect.addEventListener('change', (e) => {
+        currentSubjectFilter = e.target.value;
+        filterAndRender();
+      });
+
+      // Tag Chips
+      tagChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          searchInput.value = chip.dataset.tag;
+          currentKeyword = chip.dataset.tag;
+          clearBtn.classList.remove('hidden');
+          filterAndRender();
+        });
+      });
+
+      // Reset All
+      function resetAll() {
+        searchInput.value = '';
+        currentKeyword = '';
+        clearBtn.classList.add('hidden');
+        currentClassFilter = 'all';
+        currentSubjectFilter = 'all';
+        subjectSelect.value = 'all';
+        classButtons.forEach(b => {
+          if (b.dataset.filterClass === 'all') {
+            b.classList.add('bg-[#304D36]', 'text-[#FFFDF8]', 'shadow-[2px_2px_0px_#161616]');
+            b.classList.remove('bg-[#FFFDF8]', 'text-[#161616]');
+          } else {
+            b.classList.remove('bg-[#304D36]', 'text-[#FFFDF8]', 'shadow-[2px_2px_0px_#161616]');
+            b.classList.add('bg-[#FFFDF8]', 'text-[#161616]');
+          }
+        });
+        filterAndRender();
+      }
+
+      resetBtn.addEventListener('click', resetAll);
+
+      // Mobile Menu
+      const toggle = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+      }
+
+      // Initial Render
+      filterAndRender();
+    });
+  </script>
+</body>
+</html>

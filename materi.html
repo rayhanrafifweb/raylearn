@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Pembelajaran — RAY LEARN SMK</title>
+  <meta name="description" content="Modul artikel pembelajaran kejuruan SMK dengan penyajian majalah editorial, kode sumber interaktif, dan panduan belajar lengkap.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/raylearn-logo.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              darkGreen: '#304D36',
+              deepGreen: '#243C2B',
+              cream: '#F4EBDD',
+              warmCream: '#EFE2CF',
+              orange: '#C86E39',
+              brightOrange: '#FFB51B',
+              yellow: '#F6B51B',
+              black: '#080808',
+              white: '#FFFDF8',
+              darkText: '#161616'
+            }
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', '"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F4EBDD] text-[#161616] antialiased selection:bg-[#FFB51B] selection:text-[#080808]">
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress-bar" class="fixed top-0 left-0 h-1 bg-[#C86E39] z-[60] w-0 transition-all duration-75"></div>
+
+  <!-- Floating Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-10 transition-all duration-300">
+    <div id="main-navbar" class="max-w-7xl mx-auto my-3 px-5 py-4 bg-[#F4EBDD]/95 backdrop-blur-md border-2 border-[#161616] rounded-2xl flex items-center justify-between shadow-[4px_4px_0px_#161616] nav-floating">
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <span class="star-icon text-[#C86E39] group-hover:rotate-45 transition-transform duration-300"></span>
+        <div class="flex flex-col">
+          <span class="font-serif-title text-xl sm:text-2xl font-bold tracking-tight text-[#161616] leading-none">RAY LEARN</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-[#304D36]">Materi Pembelajaran SMK</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-[#161616]">
+        <a href="index.html" class="hover:text-[#C86E39] transition-colors">Beranda</a>
+        <a href="kelas-10.html" class="hover:text-[#C86E39] transition-colors">Kelas 10</a>
+        <a href="kelas-11.html" class="hover:text-[#C86E39] transition-colors">Kelas 11</a>
+        <a href="kelas-12.html" class="hover:text-[#C86E39] transition-colors">Kelas 12</a>
+        <a href="index.html#tentang" class="hover:text-[#C86E39] transition-colors">Tentang</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="search.html" class="p-2 sm:px-3 sm:py-2 rounded-full border border-[#161616] bg-[#FFFDF8] hover:bg-[#EFE2CF] transition-colors flex items-center gap-2 text-xs font-bold">
+          <i data-lucide="search" class="w-4 h-4 text-[#161616]"></i>
+          <span class="hidden sm:inline">Cari</span>
+        </a>
+        <a href="index.html#pilih-kelas" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#FFB51B] text-[#080808] border border-[#161616] rounded-full text-xs font-extrabold uppercase tracking-wider shadow-[2px_2px_0px_#161616]">
+          Pilih Kelas &rarr;
+        </a>
+        <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg border border-[#161616] bg-[#FFFDF8] text-[#161616]">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto mt-2 p-5 bg-[#FFFDF8] border-2 border-[#161616] rounded-2xl shadow-[6px_6px_0px_#161616] flex flex-col gap-4 text-base font-bold">
+      <a href="index.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Beranda</a>
+      <a href="kelas-10.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 10</a>
+      <a href="kelas-11.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 11</a>
+      <a href="kelas-12.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 12</a>
+      <a href="search.html" class="hover:text-[#C86E39] py-1 flex items-center justify-between">
+        <span>Cari Materi</span>
+        <i data-lucide="search" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Article Content Container -->
+  <div class="pt-28 pb-20 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+    
+    <!-- Rendered Single Article -->
+    <div id="article-content-container">
+      <!-- Injected by js/materi.js -->
+    </div>
+
+    <!-- Rendered Subject Archive View -->
+    <div id="subject-archive-container" class="hidden">
+      <!-- Injected by js/materi.js when ?subject=... is present -->
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#243C2B] text-[#FFFDF8] border-t-2 border-[#161616] pt-16 pb-12 px-4 sm:px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/15">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="star-icon text-[#FFB51B]"></span>
+            <span class="font-serif-title text-2xl font-bold text-[#FFFDF8]">RAY LEARN</span>
+          </div>
+          <p class="text-sm text-[#cbdad0] leading-relaxed mb-6 max-w-sm">
+            Materi pembelajaran SMK untuk belajar, memahami, dan berkembang. Dirancang dengan gaya visual majalah editorial modern.
+          </p>
+        </div>
+        <div class="md:col-span-4">
+          <h4 class="font-serif-title text-lg text-[#FFB51B] mb-4">Pilih Jenjang</h4>
+          <ul class="space-y-2 text-sm text-[#d0ded5]">
+            <li><a href="kelas-10.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 10 (Dasar Kejuruan)</a></li>
+            <li><a href="kelas-11.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 11 (Framework & Mobile)</a></li>
+            <li><a href="kelas-12.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 12 (IoT & Sistem Informasi)</a></li>
+            <li><a href="search.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Cari Materi</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-3">
+          <h4 class="font-serif-title text-lg text-[#FFB51B] mb-4">Navigasi Cepat</h4>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="index.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Beranda</a>
+            <a href="kelas-10.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 10</a>
+            <a href="kelas-11.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 11</a>
+            <a href="kelas-12.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 12</a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9bb09f]">
+        <div>&copy; 2026 <strong>Ray Learn</strong>. Hak cipta dilindungi undang-undang.</div>
+        <a href="index.html" class="hover:text-[#FFFDF8]">Kembali ke Beranda &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/materi.js"></script>
+  <script>
+    // Reading Progress Indicator
+    window.addEventListener('scroll', () => {
+      const progressBar = document.getElementById('reading-progress-bar');
+      if (!progressBar) return;
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>

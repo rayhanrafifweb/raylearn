@@ -1,0 +1,468 @@
+/* ==========================================================================
+   RAY LEARN — Editorial Magazine & Knowledge Hub for SMK
+   Palette:
+     Primary Dark Green: #304D36
+     Deep Green:         #243C2B
+     Cream:              #F4EBDD
+     Warm Cream:         #EFE2CF
+     Orange (Terracotta):#C86E39
+     Bright Orange:      #FFB51B
+     Yellow:             #F6B51B
+     Black:              #080808
+     White:              #FFFDF8
+     Text Dark:          #161616
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --color-primary-green: #304D36;
+  --color-deep-green: #243C2B;
+  --color-cream: #F4EBDD;
+  --color-warm-cream: #EFE2CF;
+  --color-orange: #C86E39;
+  --color-bright-orange: #FFB51B;
+  --color-yellow: #F6B51B;
+  --color-black: #080808;
+  --color-white: #FFFDF8;
+  --color-text-dark: #161616;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-text-dark);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-cream);
+  color: var(--color-text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Helpers */
+.font-serif-title {
+  font-family: 'DM Serif Display', 'Playfair Display', Georgia, serif;
+}
+
+.font-editorial-italic {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+/* Outlined Display Typography (from reference: wireframe PORTFOLIO / RESUME) */
+.text-outline-gold {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-yellow);
+}
+
+.text-outline-orange {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-orange);
+}
+
+.text-outline-cream {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(244, 235, 221, 0.45);
+}
+
+.text-outline-dark {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(22, 22, 22, 0.35);
+}
+
+/* 4-pointed Star Decorative Element */
+.star-icon {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+  background-color: currentColor;
+}
+
+.star-icon-lg {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.star-icon-xl {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+/* Timeline & Editorial List Markers */
+.diamond-marker {
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.timeline-connector {
+  position: relative;
+}
+
+.timeline-connector::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: -18px;
+  left: 6px;
+  width: 2px;
+  background-color: rgba(200, 110, 57, 0.35);
+}
+
+.timeline-item:last-child .timeline-connector::before {
+  display: none;
+}
+
+/* Solid Editorial Badges & Pills */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-warm-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-green);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-deep-green);
+}
+
+/* Card Hover Elevation */
+.editorial-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+}
+
+.editorial-card:hover {
+  transform: translateY(-6px);
+}
+
+.editorial-card:hover .card-arrow {
+  transform: translateX(6px);
+}
+
+.card-arrow {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Floating Navbar */
+.nav-floating {
+  transition: all 0.3s ease;
+}
+
+.nav-scrolled {
+  box-shadow: 0 10px 30px -10px rgba(8, 8, 8, 0.15);
+}
+
+/* Circular Badge Bridging Sections (Reference "Scroll down") */
+.scroll-bridge-badge {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1.1;
+  box-shadow: 0 6px 18px rgba(8, 8, 8, 0.12);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.scroll-bridge-badge:hover {
+  transform: scale(1.08) rotate(4deg);
+}
+
+/* Code Block in Articles */
+.code-block-wrapper {
+  background-color: #121814;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(244, 235, 221, 0.12);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background-color: #1a241d;
+  border-bottom: 1px solid rgba(244, 235, 221, 0.08);
+  font-size: 0.75rem;
+  color: #c9d5cb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.code-block-pre {
+  margin: 0;
+  padding: 1.25rem 1rem;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #f1f7f2;
+}
+
+/* Callout Box / Note Box */
+.note-box {
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1.75rem 0;
+  border-left-width: 5px;
+}
+
+.note-box-info {
+  background-color: rgba(48, 77, 54, 0.08);
+  border-left-color: var(--color-primary-green);
+  color: var(--color-text-dark);
+}
+
+.note-box-warning {
+  background-color: rgba(200, 110, 57, 0.1);
+  border-left-color: var(--color-orange);
+  color: var(--color-text-dark);
+}
+
+.note-box-tip {
+  background-color: rgba(246, 181, 27, 0.15);
+  border-left-color: var(--color-yellow);
+  color: var(--color-text-dark);
+}
+
+/* Custom Editorial Boxes for Curriculum Structure */
+.learning-objectives-box {
+  background-color: var(--color-warm-cream);
+  border: 2px solid var(--color-primary-green);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  box-shadow: 4px 4px 0px var(--color-primary-green);
+}
+
+.learning-objectives-box h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--color-primary-green);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.learning-objectives-box ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.learning-objectives-box li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  color: #2c332d;
+}
+
+.learning-objectives-box li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary-green);
+  font-size: 0.85rem;
+}
+
+.key-points-box {
+  background-color: rgba(246, 181, 27, 0.14);
+  border: 2px solid var(--color-yellow);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.75rem;
+  margin: 2.25rem 0;
+  box-shadow: 4px 4px 0px var(--color-yellow);
+}
+
+.key-points-box h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: #925404;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.pitfalls-box {
+  background-color: rgba(200, 110, 57, 0.12);
+  border: 2px solid var(--color-orange);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.75rem;
+  margin: 2.25rem 0;
+  box-shadow: 4px 4px 0px var(--color-orange);
+}
+
+.pitfalls-box h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--color-orange);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.conclusion-box {
+  background-color: var(--color-primary-green);
+  color: var(--color-white);
+  border: 2px solid var(--color-black);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+  box-shadow: 4px 4px 0px var(--color-black);
+}
+
+.conclusion-box h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--color-yellow);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.conclusion-box p {
+  color: #e5ede7;
+  margin-bottom: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Article Typography (720px - 820px reader) */
+.article-body {
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: #242424;
+}
+
+.article-body h2 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2rem;
+  line-height: 1.25;
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary-green);
+  border-bottom: 2px solid var(--color-warm-cream);
+  padding-bottom: 0.5rem;
+}
+
+.article-body h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-deep-green);
+}
+
+.article-body p {
+  margin-bottom: 1.35rem;
+}
+
+.article-body ul, .article-body ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+}
+
+.article-body blockquote {
+  margin: 1.75rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--color-orange);
+  background-color: var(--color-warm-cream);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #333333;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 0.95rem;
+}
+
+.article-body table th {
+  background-color: var(--color-primary-green);
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.article-body table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-warm-cream);
+}
+
+.article-body table tr:nth-child(even) {
+  background-color: rgba(239, 226, 207, 0.45);
+}
+
+/* Animations */
+.fade-up-element {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-up-element.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay classes */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-up-element,
+  .editorial-card,
+  .card-arrow,
+  .scroll-bridge-badge {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

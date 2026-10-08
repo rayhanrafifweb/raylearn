@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelas 12 SMK — Spesialisasi, IoT & Kesiapan Industri | RAY LEARN</title>
+  <meta name="description" content="Koleksi materi pembelajaran SMK Kelas 12: IoT ESP32, Analisis Sistem Informasi, RESTful API, Flutter Advanced, Portofolio & Interview Kerja.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/raylearn-logo.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              darkGreen: '#304D36',
+              deepGreen: '#243C2B',
+              cream: '#F4EBDD',
+              warmCream: '#EFE2CF',
+              orange: '#C86E39',
+              brightOrange: '#FFB51B',
+              yellow: '#F6B51B',
+              black: '#080808',
+              white: '#FFFDF8',
+              darkText: '#161616'
+            }
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', '"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F4EBDD] text-[#161616] antialiased selection:bg-[#FFB51B] selection:text-[#080808]">
+
+  <!-- Floating Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-10 transition-all duration-300">
+    <div id="main-navbar" class="max-w-7xl mx-auto my-3 px-5 py-4 bg-[#F4EBDD]/95 backdrop-blur-md border-2 border-[#161616] rounded-2xl flex items-center justify-between shadow-[4px_4px_0px_#161616] nav-floating">
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <span class="star-icon text-[#C86E39] group-hover:rotate-45 transition-transform duration-300"></span>
+        <div class="flex flex-col">
+          <span class="font-serif-title text-xl sm:text-2xl font-bold tracking-tight text-[#161616] leading-none">RAY LEARN</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-[#304D36]">Materi Pembelajaran SMK</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-[#161616]">
+        <a href="index.html" class="hover:text-[#C86E39] transition-colors">Beranda</a>
+        <a href="kelas-10.html" class="hover:text-[#C86E39] transition-colors">Kelas 10</a>
+        <a href="kelas-11.html" class="hover:text-[#C86E39] transition-colors">Kelas 11</a>
+        <a href="kelas-12.html" class="text-[#C86E39] font-bold border-b-2 border-[#C86E39]">Kelas 12</a>
+        <a href="index.html#tentang" class="hover:text-[#C86E39] transition-colors">Tentang</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="search.html" class="p-2 sm:px-3 sm:py-2 rounded-full border border-[#161616] bg-[#FFFDF8] hover:bg-[#EFE2CF] transition-colors flex items-center gap-2 text-xs font-bold">
+          <i data-lucide="search" class="w-4 h-4 text-[#161616]"></i>
+          <span class="hidden sm:inline">Cari</span>
+        </a>
+        <a href="#materi-list" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#FFB51B] text-[#080808] border border-[#161616] rounded-full text-xs font-extrabold uppercase tracking-wider shadow-[2px_2px_0px_#161616]">
+          Lihat Modul &darr;
+        </a>
+        <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg border border-[#161616] bg-[#FFFDF8] text-[#161616]">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto mt-2 p-5 bg-[#FFFDF8] border-2 border-[#161616] rounded-2xl shadow-[6px_6px_0px_#161616] flex flex-col gap-4 text-base font-bold">
+      <a href="index.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Beranda</a>
+      <a href="kelas-10.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 10</a>
+      <a href="kelas-11.html" class="hover:text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 11</a>
+      <a href="kelas-12.html" class="text-[#C86E39] py-1 border-b border-[#EFE2CF]">Kelas 12</a>
+      <a href="search.html" class="hover:text-[#C86E39] py-1 flex items-center justify-between">
+        <span>Cari Materi</span>
+        <i data-lucide="search" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Editorial Hero for Kelas 12 -->
+  <section class="relative bg-[#304D36] text-[#FFFDF8] pt-32 pb-24 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-12 border-b-2 border-[#161616] overflow-hidden">
+    <div class="absolute -top-10 right-0 select-none pointer-events-none opacity-20 hidden lg:block leading-none">
+      <div class="font-serif-title text-[180px] text-outline-gold tracking-tight">KELAS 12</div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#243C2B] border border-white/20 text-xs font-bold uppercase tracking-widest text-[#FFB51B] mb-6">
+          <span class="star-icon"></span>
+          <span>TINGKAT 03 &bull; FASE F AKHIR</span>
+        </div>
+
+        <h1 class="font-serif-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none mb-6">
+          KELAS 12
+        </h1>
+
+        <p class="font-editorial-italic text-2xl sm:text-3xl text-[#FFB51B] mb-6">
+          "Mastery, industry integration & real impact."
+        </p>
+
+        <p class="text-base sm:text-lg text-[#d9e7dd] leading-relaxed mb-8">
+          Puncak keahlian kejuruan: integrasi Internet of Things (IoT) dengan mikrokontroler ESP32 & MQTT, perancangan dan analisis sistem informasi (UML, DFD, Normalisasi Basis Data), RESTful API, persiapan wawancara kerja, dan uji kompetensi keahlian.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="pill-badge bg-[#FFB51B] text-[#080808]">11 Mata Pelajaran</span>
+          <span class="pill-badge bg-[#C86E39] text-[#FFFDF8]">IoT & Sistem Informasi</span>
+          <span class="pill-badge bg-[#243C2B] text-[#FFFDF8] border border-white/20">Siap Kerja</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subject Structure Breakdown (Editorial Layout) -->
+  <section class="py-16 px-4 sm:px-6 lg:px-12 bg-[#EFE2CF] border-b-2 border-[#161616]">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-10">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="diamond-marker bg-[#C86E39]"></span>
+          <span class="text-xs font-black uppercase tracking-widest text-[#304D36]">PETA MATA PELAJARAN</span>
+        </div>
+        <h2 class="font-serif-title text-3xl sm:text-4xl text-[#161616]">
+          Struktur Keilmuan Kelas 12
+        </h2>
+      </div>
+
+      <!-- Grid of 11 Subjects Required for Kelas 12 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- PPLG IoT Featured Card -->
+        <div class="bg-[#304D36] text-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[6px_6px_0px_#080808] md:col-span-2 lg:col-span-2">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-black text-[#FFB51B] uppercase tracking-wider">01 &bull; HARDWARE & EMBEDDED</span>
+            <span class="pill-badge bg-[#FFB51B] text-[#080808] text-[10px]">PPLG &rarr; IOT</span>
+          </div>
+
+          <h3 class="font-serif-title text-3xl text-[#FFFDF8] mb-3">
+            PPLG &mdash; Internet of Things (IoT)
+          </h3>
+          <p class="text-sm text-[#d5e3da] leading-relaxed mb-6">
+            Membangun arsitektur perangkat cerdas: pemrograman mikrokontroler ESP32, sensor telemetri, transmisi paket protokol MQTT, dan pemantauan cloud realtime.
+          </p>
+
+          <a href="materi.html?id=38" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FFB51B] text-[#080808] font-extrabold text-xs rounded-full shadow-[2px_2px_0px_#080808] hover:bg-[#F6B51B]">
+            <span>Pelajari Modul ESP32 & MQTT</span> &rarr;
+          </a>
+        </div>
+
+        <!-- PPLG Sistem Informasi -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">02 &bull; ARSITEKTUR</span>
+            <span class="pill-badge bg-[#304D36] text-[#FFFDF8] text-[10px]">PPLG &rarr; SI</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">PPLG &mdash; Sistem Informasi</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Analisis kebutuhan pengguna, pemodelan diagram UML, DFD, dan normalisasi tabel basis data (1NF - 3NF).</p>
+          <a href="materi.html?id=41" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi SI & UML</span> &rarr;
+          </a>
+        </div>
+
+        <!-- PPLG Web (Advanced REST API) -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">03 &bull; BACKEND API</span>
+            <span class="pill-badge bg-[#C86E39] text-[#FFFDF8] text-[10px]">REST API</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">PPLG &mdash; Web Tingkat Lanjut</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Pembuatan RESTful API, otentikasi token JWT, dan keamanan endpoint layanan web perusahaan.</p>
+          <a href="materi.html?id=43" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi Advanced Web</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Pemrograman Mobile (Flutter Advanced) -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">04 &bull; MOBILE</span>
+            <span class="pill-badge bg-[#FFB51B] text-[#080808] text-[10px]">FLUTTER</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">Pemrograman Mobile</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">State management skala besar (Riverpod/Bloc), request HTTP async, dan parsing respons JSON.</p>
+          <a href="materi.html?id=44" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi Flutter Lanjut</span> &rarr;
+          </a>
+        </div>
+
+        <!-- PPLG Pemrograman Desktop -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">05 &bull; DEPLOYMENT</span>
+            <span class="pill-badge bg-[#304D36] text-[#FFFDF8] text-[10px]">PACKAGING</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">Pemrograman Desktop</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Deployment dan packaging file installer executable (MSI/EXE) untuk aplikasi multiplatform.</p>
+          <a href="materi.html?id=45" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi Desktop</span> &rarr;
+          </a>
+        </div>
+
+        <!-- PKKWU -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">06 &bull; STARTUP</span>
+            <span class="pill-badge bg-[#C86E39] text-[#FFFDF8] text-[10px]">PITCHING</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">PKKWU</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Presentasi pitch deck, pendaftaran Hak Kekayaan Intelektual (HKI), dan strategi peluncuran produk.</p>
+          <a href="materi.html?id=46" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi PKKWU</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Bahasa Inggris -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">07 &bull; KARIER</span>
+            <span class="pill-badge bg-[#EFE2CF] text-[#161616] text-[10px]">INTERVIEW</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">Bahasa Inggris</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Persiapan simulasi wawancara kerja teknis internasional dan presentasi portofolio peranti lunak.</p>
+          <a href="materi.html?id=47" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi Bahasa Inggris</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Matematika -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">08 &bull; ANALITIK</span>
+            <span class="pill-badge bg-[#EFE2CF] text-[#161616] text-[10px]">KALKULUS</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">Matematika</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Konsep turunan, integral dasar, dan statistik inferensial untuk optimasi algoritma data science.</p>
+          <a href="materi.html?id=48" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi Matematika</span> &rarr;
+          </a>
+        </div>
+
+        <!-- PPKn -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">09 &bull; HUKUM</span>
+            <span class="pill-badge bg-[#EFE2CF] text-[#161616] text-[10px]">UU ITE</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">PPKn</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Etika siber, tanggung jawab hukum pengembang sistem, dan regulasi penegakan UU ITE.</p>
+          <a href="materi.html?id=49" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi PPKn</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Bahasa Indonesia -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">10 &bull; REKRUTMEN</span>
+            <span class="pill-badge bg-[#EFE2CF] text-[#161616] text-[10px]">CV ATS</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">Bahasa Indonesia</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Penyusunan surat lamaran kerja resmi dan Curriculum Vitae (CV) terstandar ATS ramah mesin rekruter.</p>
+          <a href="materi.html?id=50" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi Bahasa Indonesia</span> &rarr;
+          </a>
+        </div>
+
+        <!-- PAI -->
+        <div class="bg-[#FFFDF8] border-2 border-[#161616] p-6 rounded-xl shadow-[4px_4px_0px_#161616]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-[#C86E39] uppercase tracking-wider">11 &bull; KEPEMIMPINAN</span>
+            <span class="pill-badge bg-[#EFE2CF] text-[#161616] text-[10px]">INTEGRITAS</span>
+          </div>
+          <h3 class="font-serif-title text-2xl text-[#161616] mb-2">PAI</h3>
+          <p class="text-xs text-[#555] leading-relaxed mb-4">Kepemimpinan amanah, etika hubungan kerja tim, serta komitmen kejujuran intelektual di industri.</p>
+          <a href="materi.html?id=51" class="text-xs font-bold text-[#304D36] hover:text-[#C86E39] flex items-center gap-1">
+            <span>Buka Materi PAI</span> &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Materials List for Kelas 12 -->
+  <section id="materi-list" class="py-24 px-4 sm:px-6 lg:px-12 bg-[#F4EBDD]">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="star-icon text-[#C86E39]"></span>
+            <span class="text-xs font-black uppercase tracking-widest text-[#304D36]">DAFTAR LENGKAP ARSIP</span>
+          </div>
+          <h2 class="font-serif-title text-4xl sm:text-5xl text-[#161616]">
+            Semua Materi Kelas 12
+          </h2>
+        </div>
+        <div class="text-xs font-bold text-[#666]">
+          Menampilkan seluruh artikel kurikulum Kelas 12
+        </div>
+      </div>
+
+      <!-- Materials Grid populated via JS from data.js -->
+      <div id="kelas12-materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered via script -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#243C2B] text-[#FFFDF8] border-t-2 border-[#161616] pt-16 pb-12 px-4 sm:px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/15">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="star-icon text-[#FFB51B]"></span>
+            <span class="font-serif-title text-2xl font-bold text-[#FFFDF8]">RAY LEARN</span>
+          </div>
+          <p class="text-sm text-[#cbdad0] leading-relaxed mb-6 max-w-sm">
+            Materi pembelajaran SMK untuk belajar, memahami, dan berkembang. Dirancang dengan gaya visual majalah editorial modern.
+          </p>
+        </div>
+        <div class="md:col-span-4">
+          <h4 class="font-serif-title text-lg text-[#FFB51B] mb-4">Pilih Jenjang</h4>
+          <ul class="space-y-2 text-sm text-[#d0ded5]">
+            <li><a href="kelas-10.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 10 (Dasar Kejuruan)</a></li>
+            <li><a href="kelas-11.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Kelas 11 (Framework & Mobile)</a></li>
+            <li><a href="kelas-12.html" class="text-[#FFB51B] font-bold">&rarr; Kelas 12 (Aktif)</a></li>
+            <li><a href="search.html" class="hover:text-[#FFB51B] transition-colors">&rarr; Cari Materi</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-3">
+          <h4 class="font-serif-title text-lg text-[#FFB51B] mb-4">Navigasi Cepat</h4>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="index.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Beranda</a>
+            <a href="kelas-10.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 10</a>
+            <a href="kelas-11.html" class="bg-[#304D36] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#FFB51B]">Kelas 11</a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9bb09f]">
+        <div>&copy; 2026 <strong>Ray Learn</strong>. Hak cipta dilindungi undang-undang.</div>
+        <a href="index.html" class="hover:text-[#FFFDF8]">Kembali ke Beranda &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+      
+      const grid = document.getElementById('kelas12-materials-grid');
+      if (grid && typeof materials !== 'undefined') {
+        const k12 = materials.filter(m => m.classLevel === 12);
+        let html = '';
+        k12.forEach(item => {
+          html += `
+            <article class="bg-[#FFFDF8] border-2 border-[#161616] rounded-xl p-6 flex flex-col justify-between editorial-card shadow-[4px_4px_0px_#161616]">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="text-xs font-black uppercase tracking-wider text-[#C86E39]">
+                    ${item.subject}
+                  </span>
+                  <span class="text-xs text-[#666] font-medium bg-[#EFE2CF] px-2 py-0.5 rounded">
+                    ${item.readTime}
+                  </span>
+                </div>
+
+                <h4 class="font-serif-title text-xl md:text-2xl text-[#161616] mb-3 leading-snug">
+                  <a href="materi.html?id=${item.id}" class="hover:text-[#C86E39] transition-colors">
+                    ${item.title}
+                  </a>
+                </h4>
+
+                <p class="text-[#3c443e] text-sm leading-relaxed mb-4 line-clamp-3">
+                  ${item.description}
+                </p>
+              </div>
+
+              <div class="pt-4 border-t border-[#EFE2CF] flex items-center justify-between">
+                <span class="text-xs text-[#6e7b70]">${item.category}</span>
+                <a href="materi.html?id=${item.id}" class="inline-flex items-center gap-1 font-bold text-sm text-[#304D36] hover:text-[#C86E39] group">
+                  <span>Buka Artikel</span>
+                  <span class="card-arrow">&rarr;</span>
+                </a>
+              </div>
+            </article>
+          `;
+        });
+        grid.innerHTML = html;
+      }
+
+      // Mobile Menu
+      const toggle = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+      }
+    });
+  </script>
+</body>
+</html>
